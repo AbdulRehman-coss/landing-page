@@ -16,13 +16,19 @@ const Header: FC = () => {
   return (
     <Box sx={{ backgroundColor: 'background.paper' }}>
       <Container sx={{ py: { xs: 2, md: 3 } }}>
+        
         <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+          
           <Logo />
+
+          {/* Hamburger Button */}
           <Box sx={{ ml: 'auto', display: { xs: 'inline-flex', md: 'none' } }}>
-            <IconButton onClick={() => setVisibleMenu(!visibleMenu)}>
+            <IconButton onClick={() => setVisibleMenu(true)}>
               <Menu />
             </IconButton>
           </Box>
+
+          {/* NAV MENU */}
           <Box
             sx={{
               width: '100%',
@@ -30,35 +36,41 @@ const Header: FC = () => {
               alignItems: 'center',
               justifyContent: 'space-between',
               flexDirection: { xs: 'column', md: 'row' },
-
               transition: (theme) => theme.transitions.create(['top']),
+
               ...(matchMobileView && {
                 py: 6,
                 backgroundColor: 'background.paper',
-                zIndex: 'appBar',
+                zIndex: 1300,
                 position: 'fixed',
-                height: { xs: '100vh', md: 'auto' },
+                height: '100vh',
                 top: visibleMenu ? 0 : '-120vh',
                 left: 0,
               }),
             }}
           >
-            <Box /> {/* Magic space */}
-            <Navigation />
+            <Box /> {/* spacing fix */}
+
+            {/* IMPORTANT: closeMenu pass kiya */}
+            <Navigation closeMenu={() => setVisibleMenu(false)} />
+
             <AuthNavigation />
-            {visibleMenu && matchMobileView && (
+
+            {/* Close button */}
+            {matchMobileView && visibleMenu && (
               <IconButton
                 sx={{
                   position: 'fixed',
                   top: 10,
                   right: 10,
                 }}
-                onClick={() => setVisibleMenu(!visibleMenu)}
+                onClick={() => setVisibleMenu(false)}
               >
                 <Close />
               </IconButton>
             )}
           </Box>
+
         </Box>
       </Container>
     </Box>

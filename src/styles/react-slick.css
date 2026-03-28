@@ -1,3 +1,4 @@
+
 /* Arrows */
 .slick-prev,
 .slick-next {
@@ -36,7 +37,7 @@
 }
 
 .slick-prev {
-  left: -12px;
+  left: 0;
 }
 [dir='rtl'] .slick-prev {
   left: 0;
@@ -44,8 +45,8 @@
 }
 
 .slick-next {
-  /*right: -25px;*/
-  left: 100px;
+  right: 0;
+  left: auto;
 }
 [dir='rtl'] .slick-next {
   right: auto;

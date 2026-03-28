@@ -3,18 +3,29 @@ import Box from '@mui/material/Box'
 import { Link as ScrollLink } from 'react-scroll'
 import { navigations } from './navigation.data'
 
-const Navigation: FC = () => {
+type Props = {
+  closeMenu?: () => void
+}
+
+const Navigation: FC<Props> = ({ closeMenu }) => {
   return (
     <Box sx={{ display: 'flex', flexDirection: { xs: 'column', md: 'row' } }}>
+      
       {navigations.map(({ path: destination, label }) => (
         <Box
           component={ScrollLink}
           key={destination}
-          activeClass="current"
           to={destination}
           spy={true}
           smooth={true}
-          duration={350}
+          duration={500}
+          offset={-70}
+          activeClass="current"
+
+          onClick={() => {
+            closeMenu?.()   // 🔥 MENU CLOSE FIX
+          }}
+
           sx={{
             position: 'relative',
             color: 'text.disabled',
@@ -26,22 +37,20 @@ const Navigation: FC = () => {
             px: { xs: 0, md: 3 },
             mb: { xs: 3, md: 0 },
             fontSize: { xs: '1.2rem', md: 'inherit' },
-            ...(destination === '/' && {
-              color: 'primary.main',
-            }),
 
             '& > div': { display: 'none' },
-
-            '&.current>div': { display: 'block' },
+            '&.current > div': { display: 'block' },
 
             '&:hover': {
               color: 'primary.main',
-              '&>div': {
+              '& > div': {
                 display: 'block',
               },
             },
           }}
         >
+          
+          {/* underline / curve */}
           <Box
             sx={{
               position: 'absolute',
@@ -50,12 +59,13 @@ const Navigation: FC = () => {
               '& img': { width: 44, height: 'auto' },
             }}
           >
-            {/* eslint-disable-next-line */}
             <img src="/images/headline-curve.svg" alt="Headline curve" />
           </Box>
+
           {label}
         </Box>
       ))}
+
     </Box>
   )
 }
