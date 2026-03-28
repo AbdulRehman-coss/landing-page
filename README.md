@@ -63,8 +63,7 @@ http://localhost:3000
 
 ## 🌐 Live Demo
 
-👉 https://your-project.vercel.app
-
+👉 landing-page-xi-rosy-15.vercel.app
 ---
 
 ## 👨‍💻 Author
